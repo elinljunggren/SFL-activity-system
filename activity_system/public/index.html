@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" ng-app="activity_system">
+<head>
+  <meta charset="utf-8">
+  <title>SFL - Activity System</title>
+  <!--CSS-->
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <!--Angular  scripts-->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <!--Angular material and it's dependencies scripts-->
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+  <!--Moment script-->
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular-moment/angular-moment.min.js"></script>
+  <!-- Icon font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Project scripts-->
+  <script src="app.js"></script>
+  <script src="admin/admin.js"></script>
+  <script src="report-activity/report-activity.js"></script>
+  <script src="service/service.js"></script>
+  <script src="login/login.js"></script>
+  <script src="service/authentication.service.js"></script>
+</head>
+<body layout="column" ng-controller="ApplicationCtrl as appCtrl">
+
+  <div flex ng-view query=query layout="column"></div>
+
+</body>
+</html>
