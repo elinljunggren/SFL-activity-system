@@ -29,6 +29,7 @@ var activity_system = angular
     .run(function ($rootScope, $window, AuthenticationService) {
         $rootScope.$on('$routeChangeStart', function (event, next) {
           console.log("Cookies",document.cookie);
+          
           if (!next.$$route.data || !next.$$route.data.allowedRoles) {
             return;
           }

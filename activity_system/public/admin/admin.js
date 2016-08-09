@@ -4,19 +4,31 @@
 
 
   angular
-    .module('activity_system.admin',['ngRoute'])
+    .module('activity_system.admin',['ngRoute','ngMaterial'])
     .controller('AdminController', AdminController);
 
-  AdminController.$inject = ['$scope'];
+  AdminController.$inject = ['$scope','$http'];
 
   /* @ngInject */
-  function AdminController($scope) {
-    var vm = this;
-    vm.title = 'AdminController'
+  function AdminController($scope,$http) {
+    var self = this;
+
+    $scope.items = [];
 
     activate();
 
     ////////////////
+
+    $scope.getItems = function() {
+         $http.get('api/staff')
+            .success(function(data, status) {
+                $scope.items = data;
+                console.log(status);
+             })
+            .error(function(data, status) {
+                console.log("Error");
+            })
+    }
 
     function activate() {
       console.log("Activate in admin!");

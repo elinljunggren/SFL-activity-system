@@ -1,2 +1,11 @@
 <h1>You're an admin Harry</h1>
 <a href="#/report-activity">Report activity</a>
+<ul>
+    <li ng-repeat="item in items">{{item.name}} - {{item.title}}</li>
+</ul>
+<md-input-container>
+<md-button ng-click="getItems()"
+                   class="md-raised md-primary"
+                   aria-label="getitems">Get items
+        </md-button>
+</md-input-container>

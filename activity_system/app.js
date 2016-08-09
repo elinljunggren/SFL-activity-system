@@ -25,6 +25,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'mysql'
+});
+
+connection.query('USE activity_system');
+
+app.get('/api/staff', function(req, res, next) {
+  //var staff = [{name: "Björn", tel: "0706"},{name: "Elin", tel: "0755"}];
+  connection.query('SELECT * FROM staff', function(err, rows, fields) {
+  if (err) throw err;
+  res.send(rows);
+});
+  
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
