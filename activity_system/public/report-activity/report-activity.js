@@ -5,15 +5,18 @@
   'use strict';
 
   angular
-    .module('activity_system.report-activity',['ngRoute'])
+    .module('activity_system.report-activity',['ngRoute','ngMaterial', 'ngMessages'])
     .controller('ReportActivityController', ReportActivityController);
 
   ReportActivityController.$inject = ['$scope'];
 
   /* @ngInject */
   function ReportActivityController($scope) {
-    var vm = this;
-    vm.title = 'ReportActivityController'
+    $scope.controller = this;
+
+    var activity = {
+      date: undefined
+    };
 
     activate();
 

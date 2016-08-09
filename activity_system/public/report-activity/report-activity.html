@@ -1,1 +1,12 @@
 <h1>Reporting an activity are we?</h1>
+<form class="flexibleform" name="ReportActivityForm" ng-submit="controller.submit()" layout-margin>
+    <div layout="row" layout-align="start" class="formrow">
+        <md-datepicker ng-model="controller.activity.date" md-placeholder="Enter date" name="date" required></md-datepicker>
+      <div ng-messages="ReportActivityForm.date.$error" ng-if="ReportActivityForm.date.$touched">
+        <div ng-message="required">
+          Date required
+        </div>
+      </div>
+    </div>
+    <md-button class="md-raised md-primary" type="submit">Submit activity</md-button>
+  </form>
