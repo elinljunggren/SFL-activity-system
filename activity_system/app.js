@@ -34,14 +34,10 @@ var connection = mysql.createConnection({
 
 connection.query('USE activity_system');
 
-app.get('/api/staff', function(req, res, next) {
-  //var staff = [{name: "Björn", tel: "0706"},{name: "Elin", tel: "0755"}];
-  connection.query('SELECT * FROM staff', function(err, rows, fields) {
-  if (err) throw err;
-  res.send(rows);
-});
-  
-})
+//////////////////////////// API METHODS //////////////////////////////////
+require('./api/staff')(app,connection);
+
+//////////////////////////////////////////////////////////////////////////
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
