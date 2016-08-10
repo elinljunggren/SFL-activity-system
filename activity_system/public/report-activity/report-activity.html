@@ -1,6 +1,31 @@
 <h1>Reporting an activity are we?</h1>
 <form class="flexibleform" name="ReportActivityForm" ng-submit="controller.submit()" layout-margin>
     <div layout="row" layout-align="start" class="formrow">
+        <md-autocomplete flex="50"
+                         layout-fill
+                         md-input-minlength="2"
+                         md-selected-item="controller.selectedStaff"
+                         md-selected-item-change="controller.setStaffId()"
+                         md-search-text="controller.searchStaff"
+                         md-items="item in controller.querySearchStaff(controller.searchStaff)"
+                         md-item-text="item.name"
+                         md-min-length="2"
+                         md-floating-label="Name"
+                         placeholder="Name"
+                         ng-required="true"
+                         md-input-name="staffField">
+            <md-item-template>
+                <span md-highlight-text="controller.searchStaff" md-highlight-flags="^i">{{item.name}} </span>
+            </md-item-template>
+            <md-not-found >
+                No staff found with that name
+            </md-not-found>
+            <div ng-messages="ReportActivityForm.artistField.$error" ng-if="ReportActivityForm.artistField.$touched">
+                <div ng-message="required">You must select a name</div>
+            </div>
+        </md-autocomplete>
+    </div>
+    <div layout="row" layout-align="start" class="formrow">
         <md-datepicker ng-model="controller.activity.date" md-placeholder="Enter date" name="date" required></md-datepicker>
       <div ng-messages="ReportActivityForm.date.$error" ng-if="ReportActivityForm.date.$touched">
         <div ng-message="required">
@@ -8,5 +33,45 @@
         </div>
       </div>
     </div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Area</label>
+        <md-select ng-model="controller.activityReport.area">
+            <md-option ng-repeat="area in data.areas" value="{{area.name}}">
+                {{area.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>School</label>
+        <md-select ng-model="controller.activityReport.area">
+            <md-option ng-repeat="school in data.schools|filter : {area: controller.activityReport.area} : true" value="{{school.name}}">
+                {{school.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Program</label>
+        <md-select ng-model="controller.activityReport.program">
+            <md-option ng-repeat="program in data.programs" value="{{program.name}}">
+                {{program.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Activity Category</label>
+        <md-select ng-model="controller.activityReport.activitycategory">
+            <md-option ng-repeat="activitycategory in data.activitycategories|filter : {program: controller.activityReport.program} : true" value="{{activitycategory.name}}">
+                {{activitycategory.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Activity</label>
+        <md-select ng-model="controller.activityReport.activity">
+            <md-option ng-repeat="activity in data.activities|filter : {category: controller.activityReport.activitycategory} : true" value="{{activity.name}}">
+                {{activity.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
     <md-button class="md-raised md-primary" type="submit">Submit activity</md-button>
-  </form>
+</form>
