@@ -35,6 +35,9 @@ var connection = mysql.createConnection({
 connection.query('USE activity_system');
 
 //////////////////////////// API METHODS //////////////////////////////////
+require('./api/activity')(app,connection);
+require('./api/acategory')(app,connection);
+require('./api/program')(app,connection);
 require('./api/staff')(app,connection);
 
 //////////////////////////////////////////////////////////////////////////
