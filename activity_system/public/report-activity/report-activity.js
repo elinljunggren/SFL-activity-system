@@ -5,7 +5,7 @@
   'use strict';
 
   angular
-    .module('activity_system.report-activity',['ngRoute','ngMaterial', 'ngMessages'])
+    .module('activity_system.report-activity',['ngRoute','ngMaterial', 'ngMessages','angularMoment'])
     .controller('ReportActivityController', ReportActivityController);
 
   ReportActivityController.$inject = ['$scope','BackendService'];
@@ -18,7 +18,8 @@
     var today = new Date();
     self.activityReport = {
       staff: undefined,
-      date: today
+      date: today,
+      nrOfParticipants: 1
     };
 
     self.selectedStaff = null;
@@ -50,7 +51,26 @@
 
     self.setStaffName = function () {
       self.activityReport.staff = self.selectedStaff.name;
+      console.log(self.activityReport);
     };
+
+    self.sendActivityReport = function(){
+      var areport = {
+        date: undefined,
+        staff: undefined,
+        school: undefined,
+        activity: undefined,
+        nrOfParticipants: undefined,
+        comment: undefined
+      }
+      for (var prop in areport) {
+        areport[prop] = self.activityReport[prop];
+      }
+      areport.date =  moment(areport.date).format("YYYY-MM-DD HH:mm:ss");
+      console.log(self.activityReport);
+      console.log("Posting", areport);
+      BackendService.postResource("api/areport", areport)
+    }
 
   }
 

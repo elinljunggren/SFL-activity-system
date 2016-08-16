@@ -25,12 +25,17 @@
       console.log("Loading data");
       getResource('api/activity',"activities");
       getResource('api/acategory', "activitycategories");
+      getResource('api/area',"areas");
+      getResource('api/areport',"activityreports");
       getResource('api/program', "programs");
+      getResource('api/school',"schools");
       getResource('api/staff', "staff");
       console.log(service.data);
     }
 
     loadData();
+
+    service.postResource = postResource;
 
     return service;
 
@@ -44,6 +49,15 @@
           .error(function(data, status) {
             console.log("Error");
           })
+    }
+
+    function postResource(url, data){
+      $http.post(url,data).
+        success(function(data) {
+            console.log("Posted successfully");
+        }).error(function(data) {
+            console.error("Error in posting");
+        })
     }
 
     function sync() {
