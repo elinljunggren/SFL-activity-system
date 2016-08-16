@@ -27,17 +27,21 @@ app.use('/users', users);
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : '127.0.0.1',
   user     : 'root',
-  password : 'mysql'
+  password : 'mysql',
+  database: 'activity_system'
 });
 
-connection.query('USE activity_system');
+//connection.query('USE activity_system');
 
 //////////////////////////// API METHODS //////////////////////////////////
-require('./api/activity')(app,connection);
 require('./api/acategory')(app,connection);
+require('./api/activity')(app,connection);
+require('./api/area')(app,connection);
+require('./api/areport')(app,connection);
 require('./api/program')(app,connection);
+require('./api/school')(app,connection);
 require('./api/staff')(app,connection);
 
 //////////////////////////////////////////////////////////////////////////
