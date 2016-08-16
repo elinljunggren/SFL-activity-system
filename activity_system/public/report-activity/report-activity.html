@@ -1,11 +1,12 @@
-<h1>Reporting an activity are we?</h1>
-<form class="flexibleform" name="ReportActivityForm" ng-submit="controller.submit()" layout-margin>
+<div class="formcontainer">
+<h1 style="text-align:center;">Report activity</h1>
+<form class="formclass" name="ReportActivityForm" ng-submit="controller.submit()">
     <div layout="row" layout-align="start" class="formrow">
-        <md-autocomplete flex="50"
+        <md-autocomplete flex-gt-sm
                          layout-fill
                          md-input-minlength="2"
                          md-selected-item="controller.selectedStaff"
-                         md-selected-item-change="controller.setStaffId()"
+                         md-selected-item-change="controller.setStaffName()"
                          md-search-text="controller.searchStaff"
                          md-items="item in controller.querySearchStaff(controller.searchStaff)"
                          md-item-text="item.name"
@@ -26,14 +27,14 @@
         </md-autocomplete>
     </div>
     <div layout="row" layout-align="start" class="formrow">
-        <md-datepicker ng-model="controller.activity.date" md-placeholder="Enter date" name="date" required></md-datepicker>
+        <md-datepicker ng-model="controller.activityReport.date" md-placeholder="Enter date" name="date" required></md-datepicker>
       <div ng-messages="ReportActivityForm.date.$error" ng-if="ReportActivityForm.date.$touched">
         <div ng-message="required">
           Date required
         </div>
       </div>
     </div>
-    <md-input-container class="md-block" flex-gt-sm>
+    <md-input-container class="formrow md-block" flex-gt-sm>
         <label>Area</label>
         <md-select ng-model="controller.activityReport.area">
             <md-option ng-repeat="area in data.areas" value="{{area.name}}">
@@ -41,15 +42,15 @@
             </md-option>
         </md-select>
     </md-input-container>
-    <md-input-container class="md-block" flex-gt-sm>
+    <md-input-container class="md-block formrow" flex-gt-sm>
         <label>School</label>
-        <md-select ng-model="controller.activityReport.area">
+        <md-select ng-model="controller.activityReport.school">
             <md-option ng-repeat="school in data.schools|filter : {area: controller.activityReport.area} : true" value="{{school.name}}">
                 {{school.name}}
             </md-option>
         </md-select>
     </md-input-container>
-    <md-input-container class="md-block" flex-gt-sm>
+    <md-input-container class="md-block formrow" flex-gt-sm>
         <label>Program</label>
         <md-select ng-model="controller.activityReport.program">
             <md-option ng-repeat="program in data.programs" value="{{program.name}}">
@@ -57,7 +58,7 @@
             </md-option>
         </md-select>
     </md-input-container>
-    <md-input-container class="md-block" flex-gt-sm>
+    <md-input-container class="md-block formrow" flex-gt-sm>
         <label>Activity Category</label>
         <md-select ng-model="controller.activityReport.activitycategory">
             <md-option ng-repeat="activitycategory in data.activitycategories|filter : {program: controller.activityReport.program} : true" value="{{activitycategory.name}}">
@@ -65,7 +66,7 @@
             </md-option>
         </md-select>
     </md-input-container>
-    <md-input-container class="md-block" flex-gt-sm>
+    <md-input-container class="md-block formrow" flex-gt-sm>
         <label>Activity</label>
         <md-select ng-model="controller.activityReport.activity">
             <md-option ng-repeat="activity in data.activities|filter : {category: controller.activityReport.activitycategory} : true" value="{{activity.name}}">
@@ -73,5 +74,15 @@
             </md-option>
         </md-select>
     </md-input-container>
-    <md-button class="md-raised md-primary" type="submit">Submit activity</md-button>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Number of participants</label>
+        <input type="number" ng-model="controller.activityReport.nrOfParticipants" min="1" required>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Comments</label>
+      <textarea ng-model="controller.activityReport.comment" rows="5" md-select-on-focus>
+        </textarea>
+    </md-input-container>
+    <md-button flex-gt-sm class="md-raised md-primary" type="submit" ng-click="controller.sendActivityReport()">Submit activity</md-button>
 </form>
+</div>

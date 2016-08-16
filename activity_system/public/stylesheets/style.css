@@ -6,3 +6,24 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+.md-block {
+    margin-bottom: 20px; 
+     
+}
+
+.formclass {
+    margin: 50px;
+}
+
+.formrow {
+    
+    margin-bottom: 20px; 
+}
+
+.formcontainer {
+    padding: 10px;
+    max-width: 640px;
+    margin: 0 auto;
+}
