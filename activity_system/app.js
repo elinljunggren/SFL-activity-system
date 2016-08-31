@@ -44,6 +44,7 @@ require('./api/grade')(app,connection);
 require('./api/program')(app,connection);
 require('./api/school')(app,connection);
 require('./api/staff')(app,connection);
+require('./api/title')(app,connection);
 
 //////////////////////////////////////////////////////////////////////////
 

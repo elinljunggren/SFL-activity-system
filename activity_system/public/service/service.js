@@ -32,6 +32,7 @@
       getResource('api/program', "programs");
       getResource('api/school',"schools");
       getResource('api/staff', "staff");
+      getResource('api/title', "titles");
       console.log(service.data);
     }
 
