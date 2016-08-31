@@ -21,7 +21,7 @@
             <md-not-found >
                 No staff found with that name
             </md-not-found>
-            <div ng-messages="ReportActivityForm.artistField.$error" ng-if="ReportActivityForm.artistField.$touched">
+            <div ng-messages="ReportActivityForm.staffField.$error" ng-if="ReportActivityForm.$submitted && ReportActivityForm.staffField.$touched">
                 <div ng-message="required">You must select a name</div>
             </div>
         </md-autocomplete>
@@ -44,7 +44,7 @@
     </md-input-container>
     <md-input-container class="md-block formrow" flex-gt-sm>
         <label>School</label>
-        <md-select ng-model="controller.activityReport.school">
+        <md-select ng-model="controller.activityReport.school" ng-required="true">
             <md-option ng-repeat="school in data.schools|filter : {area: controller.activityReport.area} : true" value="{{school.name}}">
                 {{school.name}}
             </md-option>
@@ -52,7 +52,7 @@
     </md-input-container>
     <md-input-container class="md-block formrow" flex-gt-sm>
         <label>Program</label>
-        <md-select ng-model="controller.activityReport.program">
+        <md-select ng-model="controller.activityReport.program" ng-change="controller.programChanged()">
             <md-option ng-repeat="program in data.programs" value="{{program.name}}">
                 {{program.name}}
             </md-option>
@@ -61,16 +61,24 @@
     <md-input-container class="md-block formrow" flex-gt-sm>
         <label>Activity Category</label>
         <md-select ng-model="controller.activityReport.activitycategory">
-            <md-option ng-repeat="activitycategory in data.activitycategories|filter : {program: controller.activityReport.program} : true" value="{{activitycategory.name}}">
+            <md-option ng-repeat="activitycategory in data.activitycategories|filter : {program: controller.activityReport.program} : true" value="{{activitycategory.id}}">
                 {{activitycategory.name}}
             </md-option>
         </md-select>
     </md-input-container>
     <md-input-container class="md-block formrow" flex-gt-sm>
         <label>Activity</label>
-        <md-select ng-model="controller.activityReport.activity">
+        <md-select ng-model="controller.activityReport.activity" ng-required="true" md-input-name="activityField">
             <md-option ng-repeat="activity in data.activities|filter : {category: controller.activityReport.activitycategory} : true" value="{{activity.name}}">
                 {{activity.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    <md-input-container class="formrow md-block" flex-gt-sm ng-show="controller.programIsSchools">
+        <label>Grade</label>
+        <md-select ng-model="controller.activityReport.grade">
+            <md-option ng-repeat="grade in data.grades" value="{{grade.name}}">
+                {{grade.name}}
             </md-option>
         </md-select>
     </md-input-container>
@@ -80,7 +88,7 @@
     </md-input-container>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Comments</label>
-      <textarea ng-model="controller.activityReport.comment" rows="5" md-select-on-focus>
+      <textarea ng-model="controller.activityReport.comment" md-select-on-focus>
         </textarea>
     </md-input-container>
     <md-button flex-gt-sm class="md-raised md-primary" type="submit" ng-click="controller.sendActivityReport()">Submit activity</md-button>
