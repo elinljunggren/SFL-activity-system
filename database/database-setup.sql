@@ -53,6 +53,12 @@ CREATE TABLE Staff(
   PRIMARY KEY (name)
 );
 
+CREATE TABLE Grade(
+  name VARCHAR(255),
+  listOrder INT NOT NUll,
+  PRIMARY KEY(name)
+);
+
 CREATE TABLE ActivityReport(
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   date DATETIME NOT NULL,
@@ -64,6 +70,8 @@ CREATE TABLE ActivityReport(
   FOREIGN KEY (staff) REFERENCES Staff(name) ON DELETE RESTRICT,
   school VARCHAR(255) DEFAULT NULL,
   FOREIGN KEY (school) REFERENCES School(name) ON DELETE RESTRICT,
+  grade VARCHAR(255) DEFAULT NULL,
+  FOREIGN KEY (grade) REFERENCES Grade(name) ON DELETE RESTRICT,
   PRIMARY KEY (id),
   CONSTRAINT invalid_nrOfParticipants CHECK (nrOfParticipants >= 0)
 );

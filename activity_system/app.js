@@ -40,6 +40,7 @@ require('./api/acategory')(app,connection);
 require('./api/activity')(app,connection);
 require('./api/area')(app,connection);
 require('./api/areport')(app,connection);
+require('./api/grade')(app,connection);
 require('./api/program')(app,connection);
 require('./api/school')(app,connection);
 require('./api/staff')(app,connection);

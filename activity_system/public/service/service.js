@@ -14,6 +14,7 @@
       activitycategories: [],
       activityreports: [],
       areas: [],
+      grades: [],
       programs: [],
       schools: [],
       staff: [],
@@ -27,6 +28,7 @@
       getResource('api/acategory', "activitycategories");
       getResource('api/area',"areas");
       getResource('api/areport',"activityreports");
+      getResource('api/grade', "grades");
       getResource('api/program', "programs");
       getResource('api/school',"schools");
       getResource('api/staff', "staff");
@@ -51,12 +53,13 @@
           })
     }
 
-    function postResource(url, data){
+    function postResource(url, data, cbOnError){
       $http.post(url,data).
         success(function(data) {
             console.log("Posted successfully");
         }).error(function(data) {
             console.error("Error in posting");
+            cbOnError();
         })
     }
 
