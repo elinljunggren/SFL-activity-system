@@ -27,3 +27,20 @@ a {
     max-width: 640px;
     margin: 0 auto;
 }
+
+.summary {
+    margin-bottom: 10px;
+}
+
+.filters {
+    margin-bottom: 10px;
+}
+
+.filter-block {
+    margin-right: 30px;
+    max-width: 200px;
+}
+
+.md-input-container .md-errors-spacer {
+    min-height: 0;
+}

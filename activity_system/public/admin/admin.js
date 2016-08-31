@@ -35,6 +35,8 @@
       options : [5,10,25,100]
     };
 
+    $scope.filter = {};
+
     function activate() {
       console.log("Activate in admin!");
       $scope.data = BackendService.data;
