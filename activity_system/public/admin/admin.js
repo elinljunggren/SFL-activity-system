@@ -4,16 +4,14 @@
 
 
   angular
-    .module('activity_system.admin',['ngRoute','ngMaterial'])
+    .module('activity_system.admin',['ngRoute','ngMaterial','md.data.table'])
     .controller('AdminController', AdminController);
 
-  AdminController.$inject = ['$scope','$http'];
+  AdminController.$inject = ['$scope','$http','BackendService'];
 
   /* @ngInject */
-  function AdminController($scope,$http) {
+  function AdminController($scope,$http,BackendService) {
     var self = this;
-
-    $scope.items = [];
 
     activate();
 
@@ -30,8 +28,16 @@
             })
     }
 
+    $scope.tableQuery = {
+      order: 'date',
+      limit: 10,
+      page: 1,
+      options : [5,10,25,100]
+    };
+
     function activate() {
       console.log("Activate in admin!");
+      $scope.data = BackendService.data;
     }
 
   }

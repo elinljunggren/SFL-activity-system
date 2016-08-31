@@ -1,11 +1,54 @@
-<h1>You're an admin Harry</h1>
-<a href="#/report-activity">Report activity</a>
+<h1>Admin page</h1>
+<!--<a href="#/report-activity">Report activity</a>
 <ul>
     <li ng-repeat="item in items">{{item.name}} - {{item.title}}</li>
 </ul>
 <md-input-container>
 <md-button ng-click="getItems()"
-                   class="md-raised md-primary"
-                   aria-label="getitems">Get items
-        </md-button>
-</md-input-container>
+class="md-raised md-primary"
+aria-label="getitems">Get items
+</md-button>
+</md-input-container>-->
+<div class="filters">
+    Bunch of filters
+</div>
+<div class="summary">
+    Summary of activities based on filter
+</div>
+<md-table-container>
+<table md-table>
+    <thead md-head md-order="pageInfo.order" md-on-reorder="onReorder">
+        <tr md-row>
+            <th md-column md-order-by="date"><span>Date</span></th>
+            <th md-column md-order-by="staff">Staff</th>
+            <th md-column md-numeric>Activity</th>
+            <!--<th md-column md-numeric>Activity Category</th>
+            <th md-column md-order-by="program">Program</th>
+            <th md-column md-order-by="area">Area</th>-->
+            <th md-column md-numeric>School</th>
+            <th md-column md-numeric>Grade</th>
+            <th md-column md-numeric>Nr of Participants</th>
+            <th md-column md-numeric>Comment</th>
+        </tr>
+    </thead>
+    <tbody md-body>
+        <tr md-row ng-click="showActivity($event, areport)" ng-style="rowStyle"
+            ng-mouseenter="rowStyle={'background-color':'#EEEEEE'}" ng-mouseleave="rowStyle={'background-color':'white'}"
+            ng-repeat="areport in data.activityreports | orderBy: tableQuery.order | limitTo: tableQuery.limit:((tableQuery.page-1)*tableQuery.limit)">
+            <td md-cell>{{areport.date}}</td>
+            <td md-cell>{{areport.staff}}</td>
+            <td md-cell>{{areport.activity}}</td>
+            <!--<td md-cell>{{areport.category}}</td>
+            <td md-cell>{{areport.program}}</td>
+            <td md-cell>{{areport.area}}</td>-->
+            <td md-cell>{{areport.school}}</td>
+            <td md-cell>{{areport.grade}}</td>
+            <td md-cell>{{areport.nrOfParticipants}}</td>
+            <td md-cell>{{areport.comment}}</td>
+        </tr>
+    </tbody>
+</table>
+</md-table-container>
+<md-table-pagination md-limit="tableQuery.limit" md-page="tableQuery.page" md-total="{{data.activityreports.length}}"
+md-page-select md-options="tableQuery.options"></md-table-pagination>
+{{data.activityreports.length}}

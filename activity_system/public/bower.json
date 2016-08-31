@@ -6,7 +6,8 @@
     "angular": "1.4.x",
     "angular-route": "1.4.x",
     "moment": "2.11.x",
-    "angular-material": "1.0.5",
+    "angular-material": "1.1.0",
+    "angular-material-data-table": "^0.9.14",
     "angular-moment": "^0.10.3"
   },
   "resolutions": {
