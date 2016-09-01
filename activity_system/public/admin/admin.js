@@ -4,7 +4,7 @@
 
 
   angular
-    .module('activity_system.admin',['ngRoute','ngMaterial','md.data.table'])
+    .module('activity_system.admin',['ngRoute','ngMaterial','md.data.table', 'angularMoment'])
     .controller('AdminController', AdminController)
     .filter('matchFilters', function(){
       return function(areports, filter){
@@ -12,14 +12,17 @@
         for(var i = 0; i < areports.length; i++){
                 filteredAReports.push(areports[i])
           }
+        console.log(filter);
+        var fromDate = moment(filter.fromDate);
+        var toDate = moment(filter.toDate);
         for(var i = areports.length-1; i >= 0; i--){
-            if(filter.schools && filter.schools.length>0){
-              /*var school = filter.schools.find(function (obj) {
-              return obj.id == rides[i].shift;
-            });*/
-              if(filter.schools.indexOf(areports[i].school) == -1){
+          var areportsDate = moment(areports[i].date);
+            if(filter.schools && filter.schools.length>0 && filter.schools.indexOf(areports[i].school) == -1){
                 filteredAReports.splice(i,1);
-              }
+            }else if(filter.fromDate && areportsDate.isBefore(fromDate)){
+                filteredAReports.splice(i,1);
+            }else if(filter.toDate && areportsDate.isAfter(toDate)){
+                filteredAReports.splice(i,1);
             }
         }
         return filteredAReports;
