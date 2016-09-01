@@ -106,7 +106,7 @@ aria-label="getitems">Get items
             <tr md-row ng-click="showActivity($event, areport)" ng-style="rowStyle"
                 ng-mouseenter="rowStyle={'background-color':'#EEEEEE'}" ng-mouseleave="rowStyle={'background-color':'white'}"
                 ng-repeat="areport in data.activityreports | matchFilters:filter:data | orderBy: tableQuery.order | limitTo: tableQuery.limit:((tableQuery.page-1)*tableQuery.limit)">
-                <td md-cell>{{areport.date}}</td>
+                <td md-cell>{{areport.date| formatDateTime:'YYYY-MM-DD HH:mm'}}</td>
                 <td md-cell>{{areport.staff}}</td>
                 <td md-cell>{{areport.activity}}</td>
                 <!--<td md-cell>{{areport.category}}</td>

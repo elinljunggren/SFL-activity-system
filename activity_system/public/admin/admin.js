@@ -24,6 +24,11 @@
         }
         return filteredAReports;
       }
+    })
+    .filter('formatDateTime', function(){
+      return function(input,format){
+        return moment(input).format(format);
+      }
     });
 
   AdminController.$inject = ['$scope','$http','BackendService'];
