@@ -5,7 +5,26 @@
 
   angular
     .module('activity_system.admin',['ngRoute','ngMaterial','md.data.table'])
-    .controller('AdminController', AdminController);
+    .controller('AdminController', AdminController)
+    .filter('matchFilters', function(){
+      return function(areports, filter){
+        var filteredAReports = [];
+        for(var i = 0; i < areports.length; i++){
+                filteredAReports.push(areports[i])
+          }
+        for(var i = areports.length-1; i >= 0; i--){
+            if(filter.schools && filter.schools.length>0){
+              /*var school = filter.schools.find(function (obj) {
+              return obj.id == rides[i].shift;
+            });*/
+              if(filter.schools.indexOf(areports[i].school) == -1){
+                filteredAReports.splice(i,1);
+              }
+            }
+        }
+        return filteredAReports;
+      }
+    });
 
   AdminController.$inject = ['$scope','$http','BackendService'];
 
@@ -35,7 +54,21 @@
       options : [5,10,25,100]
     };
 
-    $scope.filter = {};
+    $scope.filter = {
+
+    };
+
+    $scope.findArea = function(school){
+      for(var i = 0; i<$scope.data.schools.length; i++){
+        if($scope.data.schools[i].name == school){
+          return $scope.data.schools[i].area;
+        }
+      }
+    }
+
+    $scope.filterApplied = function(){
+      console.log($scope.filter);
+    }
 
     function activate() {
       console.log("Activate in admin!");

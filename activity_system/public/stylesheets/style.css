@@ -36,6 +36,14 @@ a {
     margin-bottom: 10px;
 }
 
+.filters h3{
+    margin-top: 0;
+}
+
+.input-con{
+    margin: 5px 0;
+}
+
 .filter-block {
     margin-right: 30px;
     max-width: 200px;
