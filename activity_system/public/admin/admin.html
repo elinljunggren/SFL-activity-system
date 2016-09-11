@@ -79,6 +79,7 @@ aria-label="getitems">Get items
     </md-input-container>
         </div>
     </div>
+    <md-button class="md-button" ng-click="clearAllFilters()">Clear all</md-button>
 </div>
 <div class="summary md-whiteframe-4dp md-padding">
     <h3>Summary</h3>
@@ -93,8 +94,8 @@ aria-label="getitems">Get items
                 <th md-column md-order-by="date"><span>Date</span></th>
                 <th md-column md-order-by="staff">Staff</th>
                 <th md-column md-numeric>Activity</th>
-                <!--<th md-column md-numeric>Activity Category</th>
-                <th md-column md-order-by="program">Program</th>-->
+                <th md-column md-numeric>Activity Category</th>
+                <th md-column md-order-by="program">Program</th>
                 <th md-column md-order-by="area">Area</th>
                 <th md-column md-numeric>School</th>
                 <th md-column md-numeric>Grade</th>
@@ -109,8 +110,8 @@ aria-label="getitems">Get items
                 <td md-cell>{{areport.date| formatDateTime:'YYYY-MM-DD HH:mm'}}</td>
                 <td md-cell>{{areport.staff}}</td>
                 <td md-cell>{{areport.activity}}</td>
-                <!--<td md-cell>{{areport.category}}</td>
-                <td md-cell>{{areport.program}}</td>-->
+                <td md-cell>{{findActivityCategory(areport.activity)}}</td>
+                <td md-cell>{{findProgram(findActivityCategory(areport.activity))}}</td>
                 <td md-cell>{{findArea(areport.school)}}</td>
                 <td md-cell>{{areport.school}}</td>
                 <td md-cell>{{areport.grade}}</td>
