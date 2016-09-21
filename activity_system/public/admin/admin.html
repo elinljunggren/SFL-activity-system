@@ -64,7 +64,7 @@ aria-label="getitems">Get items
     <md-input-container flex-gt-sm class="input-con">
         <label>Activity Categories</label>
         <md-select multiple ng-model="filter.activitycategories">
-            <md-option ng-repeat="activitycategory in data.activitycategories" value="{{activitycategory.id}}">
+            <md-option ng-repeat="activitycategory in data.activitycategories" value="{{activitycategory.name}}">
                 {{activitycategory.name}}
             </md-option>
         </md-select>
