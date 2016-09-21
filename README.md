@@ -4,7 +4,7 @@ An activity system for Star for Life in South Africa.
 How to get it started
 * Install node.js
 * To install all dependencies move to activity_system/ and run: `npm install`
-* Install bower by running: `npm install -g bower`
+* Install bower by running: `npm install -g bower` in activity_system/public/
 * To install angular dependencies move to activity_system/public/ and run `bower install`
 * Install Mysql
   * Either set the password of your mysql root account to 'mysql' or change the password field in activity_system/app.js on row 32 to your password.
