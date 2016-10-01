@@ -7,8 +7,7 @@ var activity_system = angular
       'activity_system.admin',
       'activity_system.report-activity',
       'activity_system.service',
-      'activity_system.login',
-      'chart.js'
+      'activity_system.login'
     ]).config(['$routeProvider', function ($routeProvider) {
       $routeProvider.when('/admin', {
         templateUrl: 'admin/admin.html',

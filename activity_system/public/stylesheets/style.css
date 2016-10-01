@@ -67,8 +67,4 @@ a {
 
 .site-container {
     padding: 16px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
 }
