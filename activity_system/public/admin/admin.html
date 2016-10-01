@@ -13,13 +13,13 @@ aria-label="getitems">Get items
     <h3>Filters</h3>
     <div layout="row">
         <div id="dates" layout="column" layout-align="start start" class="filter-block" flex="25">
-            <md-datepicker ng-model="filter.fromDate" md-placeholder="From" name="fromDate"></md-datepicker>
-            <md-datepicker ng-model="filter.toDate" md-placeholder="To" name="toDate"></md-datepicker>
+            <md-datepicker ng-model="searchFilter.fromDate" md-placeholder="From" name="fromDate"></md-datepicker>
+            <md-datepicker ng-model="searchFilter.toDate" md-placeholder="To" name="toDate"></md-datepicker>
         </div>
         <div id="staff" layout="column" layout-align="start start" class="filter-block" flex="25">
             <md-input-container flex-gt-sm class="input-con">
                 <label>Title/s</label>
-                <md-select multiple ng-model="filter.titles">
+                <md-select multiple ng-model="searchFilter.titles">
                     <md-option ng-repeat="title in data.titles" value="{{title.name}}">
                         {{title.name}}
                     </md-option>
@@ -27,17 +27,17 @@ aria-label="getitems">Get items
             </md-input-container>
             <md-input-container flex-gt-sm class="input-con">
                 <label>Staff</label>
-                <md-select multiple ng-model="filter.staff">
+                <md-select multiple ng-model="searchFilter.staff">
                     <md-option ng-repeat="staff in data.staff" value="{{staff.name}}">
                         {{staff.name}}
                     </md-option>
                 </md-select>
             </md-input-container>
         </div>
-        <div id="place" layout="column" layout-align="start start" class="filter-block"flex="25">
+        <div id="place" layout="column" layout-align="start start" class="filter-block" flex="25">
             <md-input-container flex="100" class="input-con">
                 <label>Area/s</label>
-                <md-select multiple ng-model="filter.areas">
+                <md-select multiple ng-model="searchFilter.areas">
                     <md-option ng-repeat="area in data.areas" value="{{area.name}}">
                         {{area.name}}
                     </md-option>
@@ -45,7 +45,7 @@ aria-label="getitems">Get items
             </md-input-container>
             <md-input-container flex="100" class="input-con">
                 <label>School/s</label>
-                <md-select multiple ng-model="filter.schools" ng-change="filterApplied()">
+                <md-select multiple ng-model="searchFilter.schools" ng-change="filterApplied()">
                     <md-option ng-repeat="school in data.schools" value="{{school.name}}">
                         {{school.name}}
                     </md-option>
@@ -54,42 +54,42 @@ aria-label="getitems">Get items
         </div>
         <div id="activity" layout="column" layout-align="start start" class="filter-block" flex="25">
             <md-input-container multiple flex-gt-sm class="input-con">
-        <label>Program/s</label>
-        <md-select multiple ng-model="filter.programs">
-            <md-option ng-repeat="program in data.programs" value="{{program.name}}">
-                {{program.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-    <md-input-container flex-gt-sm class="input-con">
-        <label>Activity Categories</label>
-        <md-select multiple ng-model="filter.activitycategories">
-            <md-option ng-repeat="activitycategory in data.activitycategories" value="{{activitycategory.name}}">
-                {{activitycategory.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-    <md-input-container flex-gt-sm class="input-con">
-        <label>Activities</label>
-        <md-select multiple ng-model="filter.activities" flex-gt-sm>
-            <md-option ng-repeat="activity in data.activities" value="{{activity.name}}">
-                {{activity.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
+                <label>Program/s</label>
+                <md-select multiple ng-model="searchFilter.programs">
+                    <md-option ng-repeat="program in data.programs" value="{{program.name}}">
+                        {{program.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex-gt-sm class="input-con">
+                <label>Activites</label>
+                <md-select multiple ng-model="searchFilter.activities" ng-change="filterApplied()">
+                    <div ng-repeat="activitycategory in data.activitycategories">
+                        <md-option ng-style="{fontWeight: 'bold'}" value="{{activitycategory.name}}">
+                            {{activitycategory.name}}
+                        </md-option>
+                        <div ng-repeat="activity in data.activities|filter : {category: activitycategory.name} : true">
+                            <md-option ng-selected="searchFilter.activities.indexOf(activitycategory.name)!=-1"
+                                       ng-style="{marginLeft: '16px'}" value="{{activity.name}}">
+                                {{activity.name}}
+                            </md-option>
+                        </div>
+                    </div>
+                </md-select>
+            </md-input-container>
         </div>
     </div>
     <md-button class="md-button" ng-click="clearAllFilters()">Clear all</md-button>
 </div>
 <div class="summary md-whiteframe-4dp md-padding">
     <h3>Summary</h3>
-    Nr of activities: {{(data.activityreports|matchFilters:filter:data).length}}
+    Nr of activities: {{(data.activityreports|matchFilters:searchFilter:data).length}}
 </div>
 <div class="md-whiteframe-4dp">
     <h3><span style="margin-left:15px;">Activities</span></h3>
     <md-table-container>
-    <table md-table>
-        <thead md-head md-order="tableQuery.order" md-on-reorder="onReorder">
+        <table md-table>
+            <thead md-head md-order="tableQuery.order" md-on-reorder="onReorder">
             <tr md-row>
                 <th md-column md-order-by="date"><span>Date</span></th>
                 <th md-column md-order-by="staff">Staff</th>
@@ -102,11 +102,12 @@ aria-label="getitems">Get items
                 <th md-column md-numeric>Nr of Participants</th>
                 <th md-column md-numeric>Comment</th>
             </tr>
-        </thead>
-        <tbody md-body>
+            </thead>
+            <tbody md-body>
             <tr md-row ng-click="showActivity($event, areport)" ng-style="rowStyle"
-                ng-mouseenter="rowStyle={'background-color':'#EEEEEE'}" ng-mouseleave="rowStyle={'background-color':'white'}"
-                ng-repeat="areport in data.activityreports | matchFilters:filter:data | orderBy: tableQuery.order | limitTo: tableQuery.limit:((tableQuery.page-1)*tableQuery.limit)">
+                ng-mouseenter="rowStyle={'background-color':'#EEEEEE'}"
+                ng-mouseleave="rowStyle={'background-color':'white'}"
+                ng-repeat="areport in data.activityreports | matchFilters:searchFilter:data | orderBy: tableQuery.order | limitTo: tableQuery.limit:((tableQuery.page-1)*tableQuery.limit)">
                 <td md-cell>{{areport.date| formatDateTime:'YYYY-MM-DD HH:mm'}}</td>
                 <td md-cell>{{areport.staff}}</td>
                 <td md-cell>{{areport.activity}}</td>
@@ -118,9 +119,10 @@ aria-label="getitems">Get items
                 <td md-cell>{{areport.nrOfParticipants}}</td>
                 <td md-cell>{{areport.comment}}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </md-table-container>
-    <md-table-pagination md-limit="tableQuery.limit" md-page="tableQuery.page" md-total="{{(data.activityreports|matchFilters:filter:data).length}}"
-    md-page-select md-options="tableQuery.options"></md-table-pagination>
-    <div>
+    <md-table-pagination md-limit="tableQuery.limit" md-page="tableQuery.page"
+                         md-total="{{(data.activityreports|matchFilters:searchFilter:data).length}}"
+                         md-page-select md-options="tableQuery.options"></md-table-pagination>
+</div>

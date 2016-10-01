@@ -31,8 +31,6 @@
               var program = data.activitycategories[j].program;
             }
           }
-          console.log("program", program);
-          console.log("category", acategory);
           if(filter.schools && filter.schools.length>0 && filter.schools.indexOf(areports[i].school) == -1){
               filteredAReports.splice(i,1);
           }else if(filter.fromDate && areportsDate.isBefore(fromDate)){
@@ -88,7 +86,7 @@
       options : [5,10,25,100]
     };
 
-    $scope.filter = {};
+    $scope.searchFilter = {};
 
     $scope.findArea = function(school){
       for(var i = 0; i<$scope.data.schools.length; i++){
@@ -115,12 +113,19 @@
     }
 
     $scope.filterApplied = function(){
-      console.log($scope.filter);
-    }
+      console.log($scope.searchFilter);
+    };
+    $scope.filterAppliedd = function(category){
+      console.log($scope.searchFilter.activities.indexOf(category)!=-1)
+    };
 
     $scope.clearAllFilters = function(){
-      $scope.filter = {};
-    }
+      $scope.searchFilter = {};
+    };
+
+    $scope.filterActivity = function(activity){
+      $scope.searchFilter.activities.push(activity)
+    };
 
     function activate() {
       console.log("Activate in admin!");
