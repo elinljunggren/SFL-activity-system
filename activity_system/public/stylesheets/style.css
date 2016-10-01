@@ -8,16 +8,15 @@ a {
 
 
 .md-block {
-    margin-bottom: 20px; 
-     
+    margin-bottom: 20px;
 }
 
 .formclass {
-
+    width: 300px;
+    max-width: 300px;
 }
 
 .formrow {
-    
     margin-bottom: 20px; 
 }
 
