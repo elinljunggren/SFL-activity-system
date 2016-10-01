@@ -1,96 +1,94 @@
 <div class="formcontainer">
-<h1 style="text-align:center;">Report activity</h1>
-<form class="formclass" name="ReportActivityForm" ng-submit="controller.submit()">
-    <div layout="row" layout-align="start" class="formrow">
-        <md-autocomplete flex-gt-sm
-                         layout-fill
-                         md-input-minlength="2"
-                         md-selected-item="controller.selectedStaff"
-                         md-selected-item-change="controller.setStaffName()"
-                         md-search-text="controller.searchStaff"
-                         md-items="item in controller.querySearchStaff(controller.searchStaff)"
-                         md-item-text="item.name"
-                         md-min-length="2"
-                         md-floating-label="Name"
-                         placeholder="Name"
-                         ng-required="true"
-                         md-input-name="staffField">
-            <md-item-template>
-                <span md-highlight-text="controller.searchStaff" md-highlight-flags="^i">{{item.name}} </span>
-            </md-item-template>
-            <md-not-found >
-                No staff found with that name
-            </md-not-found>
-            <div ng-messages="ReportActivityForm.staffField.$error" ng-if="ReportActivityForm.$submitted && ReportActivityForm.staffField.$touched">
-                <div ng-message="required">You must select a name</div>
-            </div>
-        </md-autocomplete>
-    </div>
-    <div layout="row" layout-align="start" class="formrow">
-        <md-datepicker ng-model="controller.activityReport.date" md-placeholder="Enter date" name="date" required></md-datepicker>
-      <div ng-messages="ReportActivityForm.date.$error" ng-if="ReportActivityForm.date.$touched">
-        <div ng-message="required">
-          Date required
+    <h1 style="text-align:center;">Report activity</h1>
+    <form class="formclass" name="ReportActivityForm" ng-submit="controller.submit()">
+        <div class="formrow">
+            <md-autocomplete aria-label="staffField"
+                             layout-fill
+                             md-input-minlength="2"
+                             md-selected-item="controller.selectedStaff"
+                             md-selected-item-change="controller.setStaffName()"
+                             md-search-text="controller.searchStaff"
+                             md-items="item in controller.querySearchStaff(controller.searchStaff)"
+                             md-item-text="item.name"
+                             md-min-length="2"
+                             md-floating-label="Name"
+                             placeholder="Name"
+                             ng-required="true"
+                             md-input-name="staffField">
+                <md-item-template>
+                    <span md-highlight-text="controller.searchStaff" md-highlight-flags="^i">{{item.name}} </span>
+                </md-item-template>
+                <md-not-found>
+                    No staff found with that name
+                </md-not-found>
+            </md-autocomplete>
         </div>
-      </div>
-    </div>
-    <md-input-container class="formrow md-block" flex-gt-sm>
-        <label>Area</label>
-        <md-select ng-model="controller.activityReport.area">
-            <md-option ng-repeat="area in data.areas" value="{{area.name}}">
-                {{area.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-    <md-input-container class="md-block formrow" flex-gt-sm>
-        <label>School</label>
-        <md-select ng-model="controller.activityReport.school" ng-required="true">
-            <md-option ng-repeat="school in data.schools|filter : {area: controller.activityReport.area} : true" value="{{school.name}}">
-                {{school.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-    <md-input-container class="md-block formrow" flex-gt-sm>
-        <label>Program</label>
-        <md-select ng-model="controller.activityReport.program" ng-change="controller.programChanged()">
-            <md-option ng-repeat="program in data.programs" value="{{program.name}}">
-                {{program.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-    <md-input-container class="md-block formrow" flex-gt-sm>
-        <label>Activity Category</label>
-        <md-select ng-model="controller.activityReport.activitycategory">
-            <md-option ng-repeat="activitycategory in data.activitycategories|filter : {program: controller.activityReport.program} : true" value="{{activitycategory.id}}">
-                {{activitycategory.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-    <md-input-container class="md-block formrow" flex-gt-sm>
-        <label>Activity</label>
-        <md-select ng-model="controller.activityReport.activity" ng-required="true" md-input-name="activityField">
-            <md-option ng-repeat="activity in data.activities|filter : {category: controller.activityReport.activitycategory} : true" value="{{activity.name}}">
-                {{activity.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-    <md-input-container class="formrow md-block" flex-gt-sm ng-show="controller.programIsSchools">
-        <label>Grade</label>
-        <md-select ng-model="controller.activityReport.grade">
-            <md-option ng-repeat="grade in data.grades" value="{{grade.name}}">
-                {{grade.name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Number of participants</label>
-        <input type="number" ng-model="controller.activityReport.nrOfParticipants" min="1" required>
-    </md-input-container>
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Comments</label>
+        <div class="formrow">
+            <md-datepicker ng-model="controller.activityReport.date" md-placeholder="Enter date" name="date"
+                           required></md-datepicker>
+            <div ng-messages="ReportActivityForm.date.$error" ng-if="ReportActivityForm.date.$touched">
+                <div ng-message="required">
+                    Date required
+                </div>
+            </div>
+        </div>
+        <md-input-container class="formrow md-block">
+            <label>Area</label>
+            <md-select ng-model="controller.activityReport.area">
+                <md-option ng-repeat="area in data.areas" value="{{area.name}}">
+                    {{area.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="md-block formrow">
+            <label>School</label>
+            <md-select ng-model="controller.activityReport.school" ng-required="true">
+                <md-option ng-repeat="school in data.schools|filter : {area: controller.activityReport.area} : true"
+                           value="{{school.name}}">
+                    {{school.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="md-block formrow">
+            <label>Program</label>
+            <md-select ng-model="controller.activityReport.program" ng-change="controller.programChanged()">
+                <md-option ng-repeat="program in data.programs" value="{{program.name}}">
+                    {{program.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="md-block formrow">
+            <label>Activity</label>
+            <md-select ng-model="controller.activityReport.activity" md-input-name="activityField">
+                <md-optgroup
+                        ng-repeat="activitycategory in data.activitycategories|filter : {program: controller.activityReport.program} : true"
+                        label="{{activitycategory.name}}">
+                    <md-option ng-repeat="activity in data.activities|filter : {category: activitycategory.name} : true"
+                               ng-style="{marginLeft: '16px'}" value="{{activity.name}}">
+                        {{activity.name}}
+                    </md-option>
+                </md-optgroup>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="formrow md-block" ng-show="controller.programIsSchools">
+            <label>Grade</label>
+            <md-select ng-model="controller.activityReport.grade">
+                <md-option ng-repeat="grade in data.grades" value="{{grade.name}}">
+                    {{grade.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Number of participants</label>
+            <input type="number" ng-model="controller.activityReport.nrOfParticipants" min="1" required>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Comments</label>
       <textarea ng-model="controller.activityReport.comment" md-select-on-focus>
         </textarea>
-    </md-input-container>
-    <md-button flex-gt-sm class="md-raised md-primary" type="submit" ng-click="controller.sendActivityReport()">Submit activity</md-button>
-</form>
+        </md-input-container>
+        <md-button class="md-raised md-primary" type="submit" ng-click="controller.sendActivityReport()">
+            Submit activity
+        </md-button>
+    </form>
 </div>

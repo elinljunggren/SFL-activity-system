@@ -115,9 +115,6 @@
     $scope.filterApplied = function(){
       console.log($scope.searchFilter);
     };
-    $scope.filterAppliedd = function(category){
-      console.log($scope.searchFilter.activities.indexOf(category)!=-1)
-    };
 
     $scope.clearAllFilters = function(){
       $scope.searchFilter = {};

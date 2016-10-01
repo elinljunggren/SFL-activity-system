@@ -24,12 +24,14 @@ var activity_system = angular
         controller: 'LoginController'
       });
       $routeProvider.otherwise({redirectTo: '/login'});
-    }]).controller('ApplicationCtrl', ApplicationCtrl)
+    }]).config(function($mdDateLocaleProvider) {
+        $mdDateLocaleProvider.firstDayOfWeek = 1;
+    }).controller('ApplicationCtrl', ApplicationCtrl)
 
     .run(function ($rootScope, $window, AuthenticationService) {
         $rootScope.$on('$routeChangeStart', function (event, next) {
           console.log("Cookies",document.cookie);
-          
+
           if (!next.$$route.data || !next.$$route.data.allowedRoles) {
             return;
           }
