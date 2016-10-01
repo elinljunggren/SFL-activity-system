@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" ng-app="activity_system">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
   <title>SFL - Activity System</title>
   <!--CSS-->
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
@@ -29,9 +29,9 @@
   <script src="login/login.js"></script>
   <script src="service/authentication.service.js"></script>
 </head>
-<body layout="column" ng-controller="ApplicationCtrl as appCtrl">
+<body ng-controller="ApplicationCtrl as appCtrl">
 
-  <div flex ng-view query=query layout="column"></div>
+  <div ng-view ></div>
 
 </body>
 </html>
