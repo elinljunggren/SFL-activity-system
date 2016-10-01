@@ -1,34 +1,32 @@
-<div flex
-    layout="column"
-     layout-fill
-     layout-align="center center"
-     ng-controller="LoginController as ctrl"
-     class="loginbody"
+<div ng-controller="LoginController as ctrl"
+     class="login-body"
 >
-  <md-content layout-padding ng-hide="user.authenticated" md-whiteframe="12dp">
-    <form ng-submit="ctrl.login()" name="LoginForm">
-      <md-input-container>
-        <label>
-          Username</label>
-        <input type="text" ng-model="ctrl.credentials.username" name="username" required/>
-        <div ng-messages="LoginForm.username.$error">
-          <div ng-message="required">Username is required.</div>
-        </div>
-      </md-input-container>
-      <md-input-container>
-        <label>
-          Password
-        </label>
-        <input type="password" ng-model="ctrl.credentials.password" name="password" required>
-        </input>
-        <div ng-messages="LoginForm.password.$error">
-          <div ng-message="required">Password is required.</div>
-        </div>
-      </md-input-container>
-      <md-button class="md-raised md-primary" type="submit">Login</md-button>
-    </form>
-  </md-content>
-  <div ng-show="user.authenticated" style="color: white;">
-    <h1>You are already logged in</h1>
-  </div>
+    <md-content class="login-content-container" ng-hide="user.authenticated" md-whiteframe="12dp">
+        <form ng-submit="ctrl.login()" name="LoginForm">
+            <div>
+                <md-input-container>
+                    <label>
+                        Username</label>
+                    <input type="text" ng-model="ctrl.credentials.username" name="username" required/>
+                    <div ng-messages="LoginForm.username.$error">
+                        <div ng-message="required">Username is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>
+                        Password
+                    </label>
+                    <input type="password" ng-model="ctrl.credentials.password" name="password" required>
+                    </input>
+                    <div ng-messages="LoginForm.password.$error">
+                        <div ng-message="required">Password is required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <md-button class="md-raised md-primary" type="submit">Login</md-button>
+        </form>
+    </md-content>
+    <div ng-show="user.authenticated" style="color: white;">
+        <h1>You are already logged in</h1>
+    </div>
 </div>

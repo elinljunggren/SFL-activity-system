@@ -50,10 +50,25 @@ a {
     overflow: hidden;
 }
 
-.md-input-container .md-errors-spacer {
+.md-errors-spacer {
     display: none;
 }
 
-.md-errors-spacer {
-    display: none;
+.login-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-content-container {
+    padding: 16px;
+}
+
+.site-container {
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
