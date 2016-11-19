@@ -2,6 +2,9 @@
     <div class="formcontainer" id="formContainer">
     <h1 style="text-align:center; color: #0054A6">Report activity</h1>
     <form class="formclass" name="ReportActivityForm" ng-submit="controller.submit()">
+        <div ng-if="submitted" class="report-submitted-box">
+            Your report was submitted.
+        </div>
         <div class="formrow">
             <md-autocomplete aria-label="staffField"
                              layout-fill

@@ -17,6 +17,34 @@ var activity_system = angular
       $routeProvider.when('/report-activity', {
         templateUrl: 'report-activity/report-activity.html',
         controller: 'ReportActivityController',
+          resolve: {
+              data: function(BackendService){
+                  console.log("BackenService",BackendService);
+                  return BackendService.data;
+              }
+          },
+        data: {allowedRoles: ['Admin','Staff']}
+      });
+      $routeProvider.when('/report-activity/name/:name', {
+        templateUrl: 'report-activity/report-activity.html',
+        controller: 'ReportActivityController',
+          resolve: {
+              data: function(BackendService){
+                  console.log("BackenService",BackendService);
+                  return BackendService.data;
+              }
+          },
+        data: {allowedRoles: ['Admin','Staff']}
+      });
+      $routeProvider.when('/report-activity/name/:name/submitted/:submitted', {
+        templateUrl: 'report-activity/report-activity.html',
+        controller: 'ReportActivityController',
+        resolve: {
+            data: function(BackendService){
+                console.log("BackenService",BackendService);
+                return BackendService.data;
+            }
+        },
         data: {allowedRoles: ['Admin','Staff']}
       });
       $routeProvider.when('/login', {
