@@ -26,6 +26,10 @@ var activity_system = angular
       $routeProvider.otherwise({redirectTo: '/login'});
     }]).config(function($mdDateLocaleProvider) {
         $mdDateLocaleProvider.firstDayOfWeek = 1;
+    }).config(function($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('green')
+            .accentPalette('red');
     }).controller('ApplicationCtrl', ApplicationCtrl)
 
     .run(function ($rootScope, $window, AuthenticationService) {

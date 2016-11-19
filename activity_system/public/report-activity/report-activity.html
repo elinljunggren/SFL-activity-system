@@ -1,5 +1,6 @@
-<div class="formcontainer">
-    <h1 style="text-align:center;">Report activity</h1>
+<div class="report-activity-container">
+    <div class="formcontainer" id="formContainer">
+    <h1 style="text-align:center; color: #0054A6">Report activity</h1>
     <form class="formclass" name="ReportActivityForm" ng-submit="controller.submit()">
         <div class="formrow">
             <md-autocomplete aria-label="staffField"
@@ -59,7 +60,7 @@
         </md-input-container>
         <md-input-container class="md-block formrow">
             <label>Activity</label>
-            <md-select ng-model="controller.activityReport.activity" md-input-name="activityField">
+            <md-select ng-model="controller.activityReport.activity" md-input-name="activityField" required>
                 <md-optgroup
                         ng-repeat="activitycategory in data.activitycategories|filter : {program: controller.activityReport.program} : true"
                         label="{{activitycategory.name}}">
@@ -87,8 +88,9 @@
       <textarea ng-model="controller.activityReport.comment" md-select-on-focus>
         </textarea>
         </md-input-container>
-        <md-button class="md-raised md-primary" type="submit" ng-click="controller.sendActivityReport()">
+        <md-button class="md-raised md-primary submit-button" type="submit" ng-click="controller.sendActivityReport($event)">
             Submit activity
         </md-button>
     </form>
+    </div>
 </div>

@@ -1,10 +1,12 @@
 <div ng-controller="LoginController as ctrl"
      class="login-body"
 >
+    <img src="../images/sfl_logo.png" class="sfl-logo"/>
+    <h1>Activity System</h1>
     <md-content class="login-content-container" ng-hide="user.authenticated" md-whiteframe="12dp">
         <form ng-submit="ctrl.login()" name="LoginForm">
             <div>
-                <md-input-container>
+                <md-input-container style="width: 100%">
                     <label>
                         Username</label>
                     <input type="text" ng-model="ctrl.credentials.username" name="username" required/>
@@ -12,7 +14,7 @@
                         <div ng-message="required">Username is required.</div>
                     </div>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container style="width: 100%">
                     <label>
                         Password
                     </label>
@@ -23,7 +25,7 @@
                     </div>
                 </md-input-container>
             </div>
-            <md-button class="md-raised md-primary" type="submit">Login</md-button>
+            <md-button class="md-raised md-primary submit-button" type="submit">Login</md-button>
         </form>
     </md-content>
     <div ng-show="user.authenticated" style="color: white;">
